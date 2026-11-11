@@ -1,0 +1,12 @@
+# Godot
+.godot/
+*.translation
+export_presets.cfg
+.mono/
+data_*/
+
+# macOS
+.DS_Store
+
+# Exports
+build/

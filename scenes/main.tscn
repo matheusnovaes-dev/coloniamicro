@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bbrjkxlkcritp"]
+
+[ext_resource type="Script" uid="uid://bhl1hmsxjukw1" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://bdl2flhfahw6g" path="res://scripts/cell.gd" id="2_cell"]
+
+[sub_resource type="ProceduralSkyMaterial" id="Sky_1"]
+
+[sub_resource type="Sky" id="Sky_2"]
+sky_material = SubResource("Sky_1")
+
+[sub_resource type="Environment" id="Env_1"]
+background_mode = 2
+sky = SubResource("Sky_2")
+ambient_light_source = 3
+ambient_light_color = Color(0.6, 0.7, 0.65, 1)
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="Plane_1"]
+size = Vector2(30, 30)
+
+[sub_resource type="StandardMaterial3D" id="Mat_ground"]
+albedo_color = Color(0.35, 0.28, 0.2, 1)
+
+[sub_resource type="SphereMesh" id="Sphere_1"]
+
+[node name="Main" type="Node3D" unique_id=697886307]
+script = ExtResource("1_main")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1465552011]
+environment = SubResource("Env_1")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1193970337]
+transform = Transform3D(0.819152, -0.439385, 0.368688, 0, 0.642788, 0.766044, -0.573576, -0.627507, 0.526541, 0, 6, 0)
+shadow_enabled = true
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1863752745]
+mesh = SubResource("Plane_1")
+surface_material_override/0 = SubResource("Mat_ground")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2084484951]
+
+[node name="Cell" type="Node3D" parent="." unique_id=1701103051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("2_cell")
+
+[node name="Body" type="MeshInstance3D" parent="Cell" unique_id=1196223296]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01537478, -0.05870235, 0.028143167)
+mesh = SubResource("Sphere_1")
